@@ -7,7 +7,7 @@
 # shipping an app; editing them here by hand works too.
 shared:
   # Display name used in page titles, meta tags, and mail.
-  application_name: "Application"
+  application_name: "Pokemart"
 
   # Absolute URL or asset path for the product logo. Blank renders a
   # plain wordmark instead.
@@ -19,7 +19,7 @@ shared:
 
   # Fallbacks for pages that do not set their own title/description.
   default_page_title: "Welcome"
-  default_page_description: "A production-ready Rails application."
+  default_page_description: "Pokemart."
 
   # Absolute URL of the default Open Graph / social sharing image.
   # Blank omits the og:image tag.
@@ -30,12 +30,12 @@ shared:
   social_links: {}
 
   # Operator mailboxes surfaced in support links and legal pages.
-  support_email: "support@example.com"
-  legal_email: "legal@example.com"
+  support_email: "support@pokemart.api.holode.xyz"
+  legal_email: "legal@pokemart.api.holode.xyz"
 
   # Canonical production domain, no scheme. Used for sitemaps and
   # absolute URLs in mail.
-  domain: "example.com"
+  domain: "pokemart.api.holode.xyz"
 
   # Product surface: which foundation chrome this generated app exposes.
   # Modules control what code is on disk; the surface controls what the
