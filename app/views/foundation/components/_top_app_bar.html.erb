@@ -7,9 +7,7 @@
     <div class="md-top-app-bar__actions">
       <%= link_to storefront_cart_path, class: "md-icon-button md-top-app-bar__cart", aria: { label: "View cart" } do %>
         <%= material_symbol(:shopping_cart, fill: false) %>
-        <% if storefront_cart_quantity.positive? %>
-          <span class="pm-cart-badge" data-storefront-cart-count><%= storefront_cart_quantity %></span>
-        <% end %>
+        <%= render "foundation/components/cart_badge" %>
       <% end %>
       <% if user_signed_in? %>
         <span class="md-user-label"><%= current_user.email %></span>
