@@ -1,6 +1,3 @@
 <%= turbo_stream.replace "storefront-cart-count" do %>
   <%= render "foundation/components/cart_badge" %>
 <% end %>
-<%= turbo_stream.replace "storefront-cart-total" do %>
-  <%= render "foundation/storefront/cart_total", quantity: storefront_cart_quantity %>
-<% end %>
