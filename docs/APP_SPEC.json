@@ -1,0 +1,79 @@
+{
+  "name": "PokéMart",
+  "purpose": "Instagram-style Pokémon card storefront: a mobile-first visual feed of cards, tap to inspect, Turbo add-to-cart with a live counter, and guest checkout with a signed expiring receipt link.",
+  "actors": [
+    "Guest shopper (browse and buy without an account)",
+    "Signed-in owner (sees their own orders)"
+  ],
+  "entities": [
+    {
+      "name": "Product",
+      "relationships": [
+        "has_many cart_items",
+        "has_many order_items"
+      ]
+    },
+    {
+      "name": "Cart",
+      "relationships": [
+        "session-scoped, has_many cart_items",
+        "has_one order on checkout"
+      ]
+    },
+    {
+      "name": "CartItem",
+      "relationships": [
+        "belongs_to cart",
+        "belongs_to product",
+        "has quantity"
+      ]
+    },
+    {
+      "name": "Order",
+      "relationships": [
+        "has_many order_items",
+        "captures email, status, signed receipt token"
+      ]
+    },
+    {
+      "name": "OrderItem",
+      "relationships": [
+        "belongs_to order",
+        "belongs_to product",
+        "snapshots price at purchase"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "name": "Browse card feed",
+      "description": "Public root shows a scrollable visual grid of cards with prices"
+    },
+    {
+      "name": "Inspect card",
+      "description": "Tap a card to open detail in a Turbo frame — image, set, rarity, price"
+    },
+    {
+      "name": "Add to cart",
+      "description": "Add to cart from feed or detail; cart counter updates without a full reload"
+    },
+    {
+      "name": "Guest checkout",
+      "description": "Enter an email, complete via local test simulator, receive a signed expiring receipt link"
+    },
+    {
+      "name": "View receipt",
+      "description": "Open order receipt via signed token link; signed-in owners see their own orders"
+    }
+  ],
+  "modules": [
+    "storefront"
+  ],
+  "integrations": [
+    {
+      "name": "Stripe",
+      "demo_adapter": true
+    }
+  ],
+  "seed_demo": "18-24 real Pokémon cards across rarities (Double Rare, Ultra Rare, Special Illustration Rare, Mega Hyper Rare, Rare) with real market USD prices and official card images, e.g. Mega Charizard X ex, Umbreon ex, Gengar ex, Team Rocket's Mewtwo ex."
+}
