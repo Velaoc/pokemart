@@ -7,7 +7,7 @@
 # shipping an app; editing them here by hand works too.
 shared:
   # Display name used in page titles, meta tags, and mail.
-  application_name: "PokMart"
+  application_name: "PokéMart"
 
   # Absolute URL or asset path for the product logo. Blank renders a
   # plain wordmark instead.
