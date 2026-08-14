@@ -1,55 +1,43 @@
-<!-- foundation:identity -->
-# PokMart
+# PokéMart
 
-Instagram-style Pokmon card storefront: a mobile-first visual feed of cards, tap to inspect, Turbo add-to-cart with a live counter, and guest checkout with a signed expiring receipt link.
+An Instagram-style Pokémon card storefront: a mobile-first visual feed of cards, tap to inspect, Turbo add-to-cart with a live counter, and guest checkout with a signed, expiring receipt link.
 
-- Site: https://pokemart.api.holode.xyz
-- Support: support@pokemart.api.holode.xyz
-<!-- /foundation:identity -->
+Built on Vela's Rails production foundation with Material Design 3.
 
-## What this is
+## What it does
 
-Instagram-style Pokémon card storefront: a mobile-first visual feed of cards, tap to inspect, Turbo add-to-cart with a live counter, and guest checkout with a signed expiring receipt link.
+- **Card feed** — the public root is a responsive visual grid of Pokémon cards (2 columns on phones up to 6 on very wide screens), each with its artwork, rarity chip, and market price.
+- **Inspect** — tapping a card opens a detail panel in a Turbo frame: full art, set, card number, rarity, price, quantity.
+- **Add to cart** — adding from the feed or detail updates the cart badge live via Turbo Stream, no full page reload.
+- **Guest checkout** — no account needed. Checkout asks for an email and completes through a local test simulator in the preview (Stripe-ready: wire real credentials for live settlement).
+- **Signed receipts** — the receipt page is reachable through a signed, expiring link emailed after checkout.
+- **Legal pages** — versioned Terms of Service and Privacy Policy, linked from the footer and signup, describing the actual demo data flows.
 
-## Who it is for
+## Demo catalog
 
-- Guest shopper (browse and buy without an account)
-- Signed-in owner (sees their own orders)
+Seeded with 19 real Pokémon cards across rarities (Double Rare, Ultra Rare, Special Illustration Rare, Mega Hyper Rare, Hyper Rare, Rare) from Phantasmal Flames, Ascended Heroes, Prismatic Evolutions, Temporal Forces, Destined Rivals, and Paldean Fates — official card art and real market USD prices (market snapshots, not live quotes).
 
-## Main features
+Pokémon is a trademark of Nintendo / Creatures Inc. / GAME FREAK inc. This is an independent demo, not affiliated with or endorsed by The Pokémon Company.
 
-- **Browse card feed** — Public root shows a scrollable visual grid of cards with prices
-- **Inspect card** — Tap a card to open detail in a Turbo frame — image, set, rarity, price
-- **Add to cart** — Add to cart from feed or detail; cart counter updates without a full reload
-- **Guest checkout** — Enter an email, complete via local test simulator, receive a signed expiring receipt link
-- **View receipt** — Open order receipt via signed token link; signed-in owners see their own orders
+## Stack
 
-## Core entities
+- Ruby on Rails (Hotwire: Turbo Drive, Frames, Streams)
+- Material Design 3 tokens and components
+- PostgreSQL
+- Foundation storefront module: session cart, guest checkout, local checkout simulator, signed receipt links
 
-- Product
-- Cart
-- CartItem
-- Order
-- OrderItem
-
-## Included foundation modules
-
-- storefront
-
-## Run locally
+## Development
 
 ```bash
-bundle install
-bin/rails db:prepare
+bin/setup
+bin/rails db:seed   # loads the demo card catalog (dev/preview only)
 bin/dev
 ```
 
-Requires Ruby, PostgreSQL, and the usual Rails toolchain. See `bin/setup` if present.
+## Deployment
 
-## Demo
+The hosted demo wipes daily at 3AM Mexico City and is throwaway. The repo is the keeper — fork it, wire your own Stripe test/live credentials via environment variables (never commit secrets), fill in the operator details named in the Terms/Privacy pages, and deploy on your own server.
 
-18-24 real Pokémon cards across rarities (Double Rare, Ultra Rare, Special Illustration Rare, Mega Hyper Rare, Rare) with real market USD prices and official card images, e.g. Mega Charizard X ex, Umbreon ex, Gengar ex, Team Rocket's Mewtwo ex.
+## License
 
-## Deploy notes
-
-Production `config.hosts` is derived from `domain` in `config/foundation.yml`. Keep that value aligned with the real host or every request will 403.
+See [LICENSE](LICENSE). Card artwork and Pokémon trademarks belong to their respective owners; demo prices are sample data.
