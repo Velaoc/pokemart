@@ -139,10 +139,6 @@ module Foundation
       # means "without storefront" features are available.
       when :without_storefront, :public_without_storefront
         true
-      # foundation:module crm
-      when :module_crm
-        Foundation.module_available?("crm")
-      # /foundation:module crm
       when :operator
         operator == true
       else

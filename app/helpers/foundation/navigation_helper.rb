@@ -96,16 +96,6 @@ module Foundation
         }
       end
 
-      # foundation:module crm
-      if surface.feature?(:crm)
-        items << {
-          label: "CRM",
-          icon: :person,
-          href: crm_root_path,
-          active: request.path.start_with?("/crm")
-        }
-      end
-      # /foundation:module crm
 
       if surface.feature?(:admin, operator: operator)
         items << {
