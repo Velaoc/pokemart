@@ -7,6 +7,13 @@ module Foundation
       "#{currency} #{whole}.#{format('%02d', fraction)}"
     end
 
+    def storefront_cart_quantity
+      raw = session[:storefront_cart]
+      return 0 unless raw.is_a?(Hash)
+
+      raw.values.sum { |quantity| Integer(quantity, 10, exception: false).to_i }
+    end
+
     def storefront_product_image(product, alt:, class_name: nil)
       attributes = { alt: alt, class: class_name, loading: "lazy", decoding: "async" }
       if product.image.attached?
