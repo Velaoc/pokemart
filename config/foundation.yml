@@ -19,7 +19,7 @@ shared:
 
   # Fallbacks for pages that do not set their own title/description.
   default_page_title: "Welcome"
-  default_page_description: "Instagram-style Pokmon card storefront: a mobile-first visual feed of cards, tap to inspect, Turbo add-to-cart with a live counter, and guest checkout with a signed expiring receipt link."
+  default_page_description: "Instagram-style Pokémon card storefront: a mobile-first visual feed of cards, tap to inspect, Turbo add-to-cart with a live counter, and guest checkout with a signed expiring receipt link."
 
   # Absolute URL of the default Open Graph / social sharing image.
   # Blank omits the og:image tag.
