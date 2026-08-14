@@ -20,7 +20,11 @@ module Foundation
         cart[@product.id.to_s] = [ cart.fetch(@product.id.to_s, 0).to_i + quantity, 10 ].min
         rotate_storefront_checkout_nonce!
         write_storefront_cart(cart)
-        redirect_to storefront_cart_path, notice: "Added #{@product.name} to your cart."
+
+        respond_to do |format|
+          format.turbo_stream
+          format.html { redirect_to storefront_cart_path, notice: "Added #{@product.name} to your cart." }
+        end
       rescue ArgumentError
         redirect_to storefront_product_path(@product), alert: "Quantity must be between 1 and 10."
       end
