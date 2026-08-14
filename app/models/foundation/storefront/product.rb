@@ -24,6 +24,9 @@ module Foundation
       validates :inventory_quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 1_000_000 }
       validates :position, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 1_000_000 }
       validates :currency, format: { with: /\A[A-Z]{3}\z/ }
+      validates :rarity, length: { maximum: 120 }
+      validates :set_name, length: { maximum: 160 }
+      validates :card_number, length: { maximum: 40 }
       validate :safe_external_image_url
       validate :valid_image_attachment
       validate :one_image_source
@@ -47,6 +50,9 @@ module Foundation
         self.currency = currency.to_s.strip.upcase
         self.description = description.to_s.strip
         self.image_url = image_url.to_s.strip.presence
+        self.rarity = rarity.to_s.strip
+        self.set_name = set_name.to_s.strip
+        self.card_number = card_number.to_s.strip
       end
 
       def safe_external_image_url
