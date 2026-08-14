@@ -1,32 +1,45 @@
-<% title "Shop" %>
-<section class="md-section" aria-labelledby="catalog-title">
+<% title "Card feed" %>
+<section class="md-section" aria-labelledby="feed-title">
   <div class="md-section__inner">
-    <p class="md-section__eyebrow">Storefront</p>
     <div class="storefront-heading-row">
-      <h1 id="catalog-title">Shop</h1>
-      <%= link_to "View cart", storefront_cart_path, class: "md-button md-button--tonal" %>
+      <div>
+        <p class="md-section__eyebrow">PokéMart</p>
+        <h1 id="feed-title">Card feed</h1>
+      </div>
+      <%= link_to storefront_cart_path, class: "md-button md-button--tonal" do %>
+        Cart<% if storefront_cart_quantity.positive? %> (<%= storefront_cart_quantity %>)<% end %>
+      <% end %>
     </div>
+    <p class="pm-feed-subtitle">Tap a card to inspect it. Prices are market snapshots for demo display.</p>
     <% if @products.any? %>
-      <div class="storefront-product-grid">
+      <div class="pm-feed">
         <% @products.each do |product| %>
-          <article class="md-card md-card--outlined storefront-product-card">
-            <%= link_to storefront_product_path(product.slug), class: "storefront-product-card__image" do %>
-              <%= storefront_product_image(product, alt: product.description.presence || product.name) %>
+          <article class="pm-tile">
+            <%= link_to storefront_product_path(product.slug), class: "pm-tile__link", data: { turbo_frame: "product-detail" }, aria: { label: "Inspect #{product.name}" } do %>
+              <%= storefront_product_image(product, alt: product.name, class_name: "pm-tile__img") %>
+              <div class="pm-tile__shade"></div>
+              <div class="pm-tile__meta">
+                <span class="pm-tile__name"><%= product.name %></span>
+                <span class="pm-tile__row">
+                  <span class="pm-chip"><%= product.rarity.presence || "Card" %></span>
+                  <strong class="pm-tile__price"><%= storefront_money(product.price_cents, product.currency) %></strong>
+                </span>
+              </div>
             <% end %>
-            <div class="md-stack storefront-product-card__body">
-              <div><h2><%= link_to product.name, storefront_product_path(product.slug) %></h2><p><%= truncate(product.description, length: 150) %></p></div>
-              <strong><%= storefront_money(product.price_cents, product.currency) %></strong>
-              <%= link_to "View product", storefront_product_path(product.slug), class: "md-button md-button--filled" %>
-            </div>
+            <%= form_with url: items_storefront_cart_path(product), class: "pm-tile__add" do |form| %>
+              <%= form.hidden_field :quantity, value: 1 %>
+              <%= form.submit "Add to cart", class: "md-button md-button--filled md-button--small" %>
+            <% end %>
           </article>
         <% end %>
       </div>
-      <nav class="md-actions" aria-label="Catalog pages">
+      <nav class="md-actions" aria-label="Feed pages">
         <%= link_to "Previous", storefront_products_path(page: @page - 1), class: "md-button md-button--outlined" if @page > 1 %>
         <%= link_to "Next", storefront_products_path(page: @page + 1), class: "md-button md-button--outlined" if @has_next_page %>
       </nav>
+      <turbo-frame id="product-detail" class="pm-detail-frame"></turbo-frame>
     <% else %>
-      <div class="md-card md-card--filled"><h2>No products are available</h2><p>Please check again later.</p></div>
+      <div class="md-card md-card--filled"><h2>No cards are available</h2><p>Please check back later.</p></div>
     <% end %>
   </div>
 </section>
