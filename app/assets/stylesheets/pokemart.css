@@ -159,6 +159,10 @@
   position: relative;
 }
 
+.pm-cart-badge--empty {
+  display: none;
+}
+
 /* Compact (<600) */
 @media (max-width: 599px) {
   .pm-feed {
